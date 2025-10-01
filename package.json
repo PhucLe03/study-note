@@ -1,6 +1,6 @@
 {
-  "name": "vite_react_shadcn_ts",
-  "private": true,
+  "name": "study-note",
+  "homepage": "https://phucle03.github.io/study-note/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -9,6 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
