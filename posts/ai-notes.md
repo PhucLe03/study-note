@@ -1,12 +1,10 @@
-# 🤖 AI Learning Resources
-
 A collection of practical AI tools, tutorials, and learning materials for developers and designers.  
 
 ---
 
 ## 🏗️ AI in Software Development
 - [Using AI in the Design to Full Stack Development Life Cycle (LinkedIn Learning)](https://www.linkedin.com/learning/using-ai-in-the-design-to-full-stack-development-life-cycle/ai-common-hesitations-curiosities-unknowns)
-- [Accelerate Development with AI and Cursor (LinkedIn Learning)](www.linkedin.com/learning/accelerate-development-with-artificial-intelligence-and-cursor)
+- [Accelerate Development with AI and Cursor (LinkedIn Learning)](https://www.linkedin.com/learning/accelerate-development-with-artificial-intelligence-and-cursor)
 - [AI Pair Programming with GitHub Copilot (LinkedIn Learning)](https://www.linkedin.com/learning/ai-pair-programming-with-github-copilot-25302433/github-copilot-and-the-genai-revolution?u=441943138)
 - [Working with MCP Servers in GitHub Copilot Agent Mode (YouTube)](https://www.youtube.com/watch?v=ZlrQJQV14xQ&ab_channel=VisualStudioCode)
 - [GitHub Copilot and Qodo Merge (YouTube)](https://www.youtube.com/watch?v=wmmMYFVNxA0)
@@ -29,5 +27,5 @@ A collection of practical AI tools, tutorials, and learning materials for develo
 
 ## 🛠️ AI Tools & Automation
 - [Readdy AI (YouTube)](https://www.youtube.com/watch?v=smCDmy_ALNU&t=158s)
-- [Build Web Apps with AI (Lovable, YouTube)](www.youtube.com/watch?v=c0zhLzcVJRI&t=1s&ab_channel=Lovable)
-- [Build Anything with Lovale + n8n AI Agents (YouTube)](www.youtube.com/watch?v=kUpTUEwKnrk&ab_channel=NateHerk|AIAutomation)
+- [Build Web Apps with AI (Lovable, YouTube)](https://www.youtube.com/watch?v=c0zhLzcVJRI&t=1s&ab_channel=Lovable)
+- [Build Anything with Lovale + n8n AI Agents (YouTube)](https://www.youtube.com/watch?v=kUpTUEwKnrk&ab_channel=NateHerk|AIAutomation)

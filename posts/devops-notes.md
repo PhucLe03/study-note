@@ -1,5 +1,3 @@
-# 🚀 DevOps Learning Resources
-
 A curated list of resources to build and strengthen your DevOps skills.  
 
 ---
