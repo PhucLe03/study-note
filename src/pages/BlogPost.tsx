@@ -1,4 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,23 @@ import remarkGfm from "remark-gfm";
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
   const post = id ? getPostById(id) : undefined;
+  const [content, setContent] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (post) {
+      fetch(post.contentPath)
+        .then((response) => response.text())
+        .then((text) => {
+          setContent(text);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error loading markdown file:", error);
+          setIsLoading(false);
+        });
+    }
+  }, [post]);
 
   if (!post) {
     return <Navigate to="/blog" replace />;
@@ -54,11 +72,17 @@ const BlogPost = () => {
 
         {/* Post Content */}
         <div className="max-w-3xl mx-auto">
-          <div className="prose prose-lg max-w-none blog-content">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {post.content}
-            </ReactMarkdown>
-          </div>
+          {isLoading ? (
+            <div className="text-center py-12 text-muted-foreground">
+              Loading...
+            </div>
+          ) : (
+            <div className="prose prose-lg max-w-none blog-content">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {content}
+              </ReactMarkdown>
+            </div>
+          )}
         </div>
 
         {/* Navigation */}
