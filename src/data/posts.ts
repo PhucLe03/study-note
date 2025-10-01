@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-10-01",
     readTime: "2 min read",
     tags: ["DevOps", "CI/CD", "Docker", "GitHub Actions", "Cloud", "Software Engineering"],
-    contentPath: "/posts/devops-notes.md",
+    contentPath: "/study-note/posts/devops-notes.md",
     category: "note"
   },
   {
@@ -27,7 +27,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-10-01",
     readTime: "5 min read",
     tags: ["AI", "Generative AI", "Copilot", "UX Design", "Automation", "Productivity"],
-    contentPath: "/posts/ai-notes.md",
+    contentPath: "/study-note/posts/ai-notes.md",
     category: "note"
   }
 ];
