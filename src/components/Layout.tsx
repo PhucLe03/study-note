@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
               <span className="text-primary-foreground font-bold text-lg">B</span>
             </div>
             <span className="font-bold text-xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              My Blog
+              Study notes
             </span>
           </Link>
           
@@ -45,7 +45,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="container py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-muted-foreground">
-              © 2025 My Blog. Crafted with passion.
+              © 2025 Study notes. Crafted with passion.
             </div>
             <div className="flex items-center gap-6">
               <a
