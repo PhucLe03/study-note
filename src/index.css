@@ -117,12 +117,24 @@ All colors MUST be HSL.
     background-clip: text;
   }
   
+  .blog-content h1 svg,
+  .blog-content h1 img {
+    -webkit-text-fill-color: initial;
+    color: hsl(var(--foreground));
+  }
+  
   .blog-content h2 {
     @apply text-3xl md:text-4xl font-bold mb-5 mt-10;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+  
+  .blog-content h2 svg,
+  .blog-content h2 img {
+    -webkit-text-fill-color: initial;
+    color: hsl(var(--foreground));
   }
   
   .blog-content h3 {
