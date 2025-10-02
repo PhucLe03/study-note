@@ -109,32 +109,35 @@ All colors MUST be HSL.
     @apply text-foreground/90 leading-relaxed;
   }
   
-  .blog-content h1 {
-    @apply text-4xl md:text-5xl font-bold mb-6 mt-12 first:mt-0;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .blog-content h1,
+  .blog-content h2 {
+    @apply font-bold mb-6 mt-12 first:mt-0;
   }
   
-  .blog-content h1 svg,
-  .blog-content h1 img {
-    -webkit-text-fill-color: initial;
-    color: hsl(var(--foreground));
+  .blog-content h1 {
+    @apply text-4xl md:text-5xl;
+    color: transparent;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
   }
   
   .blog-content h2 {
-    @apply text-3xl md:text-4xl font-bold mb-5 mt-10;
+    @apply text-3xl md:text-4xl mb-5 mt-10;
+    color: transparent;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
-  .blog-content h2 svg,
-  .blog-content h2 img {
-    -webkit-text-fill-color: initial;
-    color: hsl(var(--foreground));
+  /* Reset gradient effect for inline elements */
+  .blog-content h1 *,
+  .blog-content h2 * {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    color: hsl(var(--foreground)) !important;
   }
   
   .blog-content h3 {
