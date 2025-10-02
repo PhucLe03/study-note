@@ -21,7 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center transition-transform group-hover:scale-110">
-              <span className="text-primary-foreground font-bold text-lg">B</span>
+              <span className="text-primary-foreground font-bold text-lg">S</span>
             </div>
             <span className="font-bold text-xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Study notes
@@ -67,23 +67,23 @@ const Layout = ({ children }: LayoutProps) => {
             </div>
             <div className="flex items-center gap-6">
               <a
-                href="https://github.com"
+                href="https://github.com/PhucLe03"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 GitHub
               </a>
-              <a
+              {/* <a
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 Twitter
-              </a>
+              </a> */}
               <a
-                href="mailto:hello@myblog.com"
+                href="mailto:hailua112003@gmail.com"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 Contact
