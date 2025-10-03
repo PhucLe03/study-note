@@ -7,7 +7,7 @@ import { getPostById, fetchPost, type BlogPost as BlogPostType } from "@/data/po
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { parseFrontmatter } from "@/utils/frontmatter";
+import matter from "gray-matter";
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,7 +26,7 @@ const BlogPost = () => {
         })
         .then((response) => response.text())
         .then((text) => {
-          const { content: markdownContent } = parseFrontmatter(text);
+          const { content: markdownContent } = matter(text);
           setContent(markdownContent);
           setIsLoading(false);
         })

@@ -1,4 +1,4 @@
-import { parseFrontmatter } from '@/utils/frontmatter';
+import matter from 'gray-matter';
 
 export interface BlogPost {
   id: string;
@@ -32,7 +32,7 @@ export const blogPostConfigs: BlogPostConfig[] = [
 
 // Parse frontmatter from markdown content
 export const parsePostMetadata = (content: string, config: BlogPostConfig): BlogPost => {
-  const { data } = parseFrontmatter(content);
+  const { data } = matter(content);
   
   return {
     id: config.id,
@@ -40,7 +40,7 @@ export const parsePostMetadata = (content: string, config: BlogPostConfig): Blog
     excerpt: data.excerpt || "",
     date: data.date || new Date().toISOString().split('T')[0],
     readTime: data.readTime || "5 min read",
-    tags: Array.isArray(data.tags) ? data.tags : [],
+    tags: typeof data.tags === 'string' ? data.tags.split(',').map((t: string) => t.trim()) : (data.tags || []),
     contentPath: config.contentPath,
     category: config.category
   };

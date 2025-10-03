@@ -1,15 +1,9 @@
 ---
-title: "🤖 AI Learning Resources"
-excerpt: "A collection of practical AI learning links for development, design, automation, and productivity tools."
-date: "2025-10-01"
-readTime: "5 min read"
-tags:
-  - AI
-  - Generative AI
-  - Copilot
-  - UX Design
-  - Automation
-  - Productivity
+title: 🤖 AI Learning Resources
+excerpt: A collection of practical AI learning links for development, design, automation, and productivity tools.
+date: 2025-10-01
+readTime: 5 min read
+tags: AI, Generative AI, Copilot, UX Design, Automation, Productivity
 ---
 
 A collection of practical AI tools, tutorials, and learning materials for developers and designers.
