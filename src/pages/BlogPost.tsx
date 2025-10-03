@@ -39,8 +39,8 @@ const BlogPost = () => {
     }
   }, [id]);
 
-  if (!isLoading && !post) {
-    return <Navigate to="/blog" replace />;
+  if (!post) {
+    return null;
   }
 
   return (
