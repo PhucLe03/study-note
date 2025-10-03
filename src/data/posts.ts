@@ -15,12 +15,12 @@ export interface BlogPost extends FrontmatterData {
 export const blogPostConfigs: BlogPostConfig[] = [
   {
     id: "devops-notes",
-    contentPath: "/posts/devops-notes.md",
+    contentPath: "posts/devops-notes.md",
     category: "note"
   },
   {
     id: "ai-notes",
-    contentPath: "/posts/ai-notes.md",
+    contentPath: "posts/ai-notes.md",
     category: "note"
   }
 ];
