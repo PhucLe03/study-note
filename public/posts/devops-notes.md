@@ -1,12 +1,4 @@
----
-title: 🚀 DevOps Learning Resources
-excerpt: A curated list of DevOps resources covering foundations, Docker, GitHub Actions, and modern CI/CD practices.
-date: 2025-10-01
-readTime: 2 min read
-tags: DevOps, CI/CD, Docker, GitHub Actions, Cloud, Software Engineering
----
-
-A curated list of resources to build and strengthen your DevOps skills.
+A curated list of resources to build and strengthen your DevOps skills.  
 
 ---
 

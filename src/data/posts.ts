@@ -1,5 +1,3 @@
-import matter from 'gray-matter';
-
 export interface BlogPost {
   id: string;
   title: string;
@@ -11,56 +9,29 @@ export interface BlogPost {
   category: "blog" | "note";
 }
 
-export interface BlogPostConfig {
-  id: string;
-  contentPath: string;
-  category: "blog" | "note";
-}
-
-export const blogPostConfigs: BlogPostConfig[] = [
+export const blogPosts: BlogPost[] = [
   {
     id: "devops-notes",
-    contentPath: "/posts/devops-notes.md",
+    title: "🚀 DevOps Learning Resources",
+    excerpt: "A curated list of DevOps resources covering foundations, Docker, GitHub Actions, and modern CI/CD practices.",
+    date: "2025-10-01",
+    readTime: "2 min read",
+    tags: ["DevOps", "CI/CD", "Docker", "GitHub Actions", "Cloud", "Software Engineering"],
+    contentPath: "/study-note/posts/devops-notes.md",
     category: "note"
   },
   {
     id: "ai-notes",
-    contentPath: "/posts/ai-notes.md",
+    title: "🤖 AI Learning Resources",
+    excerpt: "A collection of practical AI learning links for development, design, automation, and productivity tools.",
+    date: "2025-10-01",
+    readTime: "5 min read",
+    tags: ["AI", "Generative AI", "Copilot", "UX Design", "Automation", "Productivity"],
+    contentPath: "/study-note/posts/ai-notes.md",
     category: "note"
   }
 ];
 
-// Parse frontmatter from markdown content
-export const parsePostMetadata = (content: string, config: BlogPostConfig): BlogPost => {
-  const { data } = matter(content);
-  
-  return {
-    id: config.id,
-    title: data.title || "Untitled",
-    excerpt: data.excerpt || "",
-    date: data.date || new Date().toISOString().split('T')[0],
-    readTime: data.readTime || "5 min read",
-    tags: typeof data.tags === 'string' ? data.tags.split(',').map((t: string) => t.trim()) : (data.tags || []),
-    contentPath: config.contentPath,
-    category: config.category
-  };
-};
-
-// Fetch and parse a single post
-export const fetchPost = async (config: BlogPostConfig): Promise<BlogPost> => {
-  const response = await fetch(config.contentPath);
-  const content = await response.text();
-  return parsePostMetadata(content, config);
-};
-
-// Fetch all posts with metadata
-export const fetchAllPosts = async (): Promise<BlogPost[]> => {
-  const posts = await Promise.all(
-    blogPostConfigs.map(config => fetchPost(config))
-  );
-  return posts;
-};
-
-export const getPostById = (id: string): BlogPostConfig | undefined => {
-  return blogPostConfigs.find(post => post.id === id);
+export const getPostById = (id: string): BlogPost | undefined => {
+  return blogPosts.find(post => post.id === id);
 };

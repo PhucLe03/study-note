@@ -1,26 +1,18 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { fetchAllPosts, BlogPost } from "@/data/posts";
+import { blogPosts } from "@/data/posts";
 import { Calendar, Clock, BookOpen, StickyNote } from "lucide-react";
 
 type CategoryFilter = "all" | "blog" | "note";
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all");
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetchAllPosts()
-      .then(setPosts)
-      .finally(() => setIsLoading(false));
-  }, []);
-
-  const filteredPosts = posts.filter(post => {
+  const filteredPosts = blogPosts.filter(post => {
     if (selectedCategory === "all") return true;
     return post.category === selectedCategory;
   });
@@ -69,11 +61,7 @@ const Blog = () => {
 
         {/* Posts Grid */}
         <div className="max-w-5xl mx-auto grid gap-8 md:gap-10">
-          {isLoading ? (
-            <div className="text-center py-12 text-muted-foreground">
-              Loading posts...
-            </div>
-          ) : filteredPosts.length === 0 ? (
+          {filteredPosts.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">
               No posts found in this category.
             </div>
