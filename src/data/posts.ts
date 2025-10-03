@@ -1,4 +1,4 @@
-import matter from 'gray-matter';
+import { parseFrontmatter } from '@/utils/frontmatter';
 
 export interface BlogPost {
   id: string;
@@ -32,7 +32,7 @@ export const blogPostConfigs: BlogPostConfig[] = [
 
 // Parse frontmatter from markdown content
 export const parsePostMetadata = (content: string, config: BlogPostConfig): BlogPost => {
-  const { data } = matter(content);
+  const { data } = parseFrontmatter(content);
   
   return {
     id: config.id,
