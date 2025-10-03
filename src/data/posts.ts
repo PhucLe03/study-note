@@ -40,7 +40,7 @@ export const parsePostMetadata = (content: string, config: BlogPostConfig): Blog
     excerpt: data.excerpt || "",
     date: data.date || new Date().toISOString().split('T')[0],
     readTime: data.readTime || "5 min read",
-    tags: typeof data.tags === 'string' ? data.tags.split(',').map((t: string) => t.trim()) : (data.tags || []),
+    tags: Array.isArray(data.tags) ? data.tags : [],
     contentPath: config.contentPath,
     category: config.category
   };
