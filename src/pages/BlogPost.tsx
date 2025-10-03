@@ -3,33 +3,43 @@ import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { getPostById } from "@/data/posts";
+import { getPostConfigById, fetchPost, type BlogPost as BlogPostType } from "@/data/posts";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { parseFrontmatter } from "@/utils/frontmatter";
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
-  const post = id ? getPostById(id) : undefined;
+  const [post, setPost] = useState<BlogPostType | null>(null);
   const [content, setContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (post) {
-      fetch(post.contentPath)
+    const config = id ? getPostConfigById(id) : undefined;
+    
+    if (config) {
+      fetchPost(config)
+        .then((fetchedPost) => {
+          setPost(fetchedPost);
+          return fetch(fetchedPost.contentPath);
+        })
         .then((response) => response.text())
         .then((text) => {
-          setContent(text);
+          const { content: markdownContent } = parseFrontmatter(text);
+          setContent(markdownContent);
           setIsLoading(false);
         })
         .catch((error) => {
-          console.error("Error loading markdown file:", error);
+          console.error("Error loading post:", error);
           setIsLoading(false);
         });
+    } else {
+      setIsLoading(false);
     }
-  }, [post]);
+  }, [id]);
 
-  if (!post) {
+  if (!isLoading && !post) {
     return <Navigate to="/blog" replace />;
   }
 

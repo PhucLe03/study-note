@@ -1,37 +1,50 @@
-export interface BlogPost {
+import { parseFrontmatter, type FrontmatterData } from "@/utils/frontmatter";
+
+export interface BlogPostConfig {
   id: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  tags: string[];
   contentPath: string;
   category: "blog" | "note";
 }
 
-export const blogPosts: BlogPost[] = [
+export interface BlogPost extends FrontmatterData {
+  id: string;
+  contentPath: string;
+  category: "blog" | "note";
+}
+
+export const blogPostConfigs: BlogPostConfig[] = [
   {
     id: "devops-notes",
-    title: "🚀 DevOps Learning Resources",
-    excerpt: "A curated list of DevOps resources covering foundations, Docker, GitHub Actions, and modern CI/CD practices.",
-    date: "2025-10-01",
-    readTime: "2 min read",
-    tags: ["DevOps", "CI/CD", "Docker", "GitHub Actions", "Cloud", "Software Engineering"],
-    contentPath: "/study-note/posts/devops-notes.md",
+    contentPath: "/posts/devops-notes.md",
     category: "note"
   },
   {
     id: "ai-notes",
-    title: "🤖 AI Learning Resources",
-    excerpt: "A collection of practical AI learning links for development, design, automation, and productivity tools.",
-    date: "2025-10-01",
-    readTime: "5 min read",
-    tags: ["AI", "Generative AI", "Copilot", "UX Design", "Automation", "Productivity"],
-    contentPath: "/study-note/posts/ai-notes.md",
+    contentPath: "/posts/ai-notes.md",
     category: "note"
   }
 ];
 
-export const getPostById = (id: string): BlogPost | undefined => {
-  return blogPosts.find(post => post.id === id);
-};
+export async function fetchPost(config: BlogPostConfig): Promise<BlogPost> {
+  const response = await fetch(config.contentPath);
+  const markdown = await response.text();
+  const { data } = parseFrontmatter(markdown);
+  
+  return {
+    id: config.id,
+    contentPath: config.contentPath,
+    category: config.category,
+    ...data
+  };
+}
+
+export async function fetchAllPosts(): Promise<BlogPost[]> {
+  const posts = await Promise.all(
+    blogPostConfigs.map(config => fetchPost(config))
+  );
+  return posts;
+}
+
+export function getPostConfigById(id: string): BlogPostConfig | undefined {
+  return blogPostConfigs.find(config => config.id === id);
+}
