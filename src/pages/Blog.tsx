@@ -7,14 +7,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { fetchAllPosts, type BlogPost } from "@/data/posts";
 import { Calendar, Clock, BookOpen, StickyNote, Search } from "lucide-react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 type CategoryFilter = "all" | "blog" | "note";
+
+const POSTS_PER_PAGE = 10;
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     document.title = "Blog & Notes";
@@ -28,6 +40,69 @@ const Blog = () => {
     const matchesSearch = searchQuery === "" || post.title.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, searchQuery]);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  const endIndex = startIndex + POSTS_PER_PAGE;
+  const currentPosts = filteredPosts.slice(startIndex, endIndex);
+
+  // Generate page numbers with ellipsis
+  const getPageNumbers = () => {
+    const pages: (number | 'ellipsis')[] = [];
+    const PAGES_TO_SHOW = 5; // Show 5 pages around current page
+    
+    if (totalPages <= 7) {
+      // Show all pages if total is small
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Always show first page
+      pages.push(1);
+      
+      // Calculate range around current page
+      let startPage = Math.max(2, currentPage - Math.floor(PAGES_TO_SHOW / 2));
+      let endPage = Math.min(totalPages - 1, currentPage + Math.floor(PAGES_TO_SHOW / 2));
+      
+      // Adjust if we're near the beginning
+      if (currentPage <= Math.floor(PAGES_TO_SHOW / 2) + 1) {
+        endPage = Math.min(PAGES_TO_SHOW, totalPages - 1);
+        startPage = 2;
+      }
+      
+      // Adjust if we're near the end
+      if (currentPage >= totalPages - Math.floor(PAGES_TO_SHOW / 2)) {
+        startPage = Math.max(2, totalPages - PAGES_TO_SHOW);
+        endPage = totalPages - 1;
+      }
+      
+      // Add ellipsis after first page if needed
+      if (startPage > 2) {
+        pages.push('ellipsis');
+      }
+      
+      // Add middle pages
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      
+      // Add ellipsis before last page if needed
+      if (endPage < totalPages - 1) {
+        pages.push('ellipsis');
+      }
+      
+      // Always show last page
+      pages.push(totalPages);
+    }
+    
+    return pages;
+  };
 
   return (
     <Layout>
@@ -93,7 +168,7 @@ const Blog = () => {
               No posts found in this category.
             </div>
           ) : (
-            filteredPosts.map((post) => (
+            currentPosts.map((post) => (
             <Link key={post.id} to={`/blog/${post.id}`}>
               <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border/50 overflow-hidden relative">
                 {/* Gradient overlay on hover */}
@@ -131,6 +206,56 @@ const Blog = () => {
             ))
           )}
         </div>
+
+        {/* Pagination */}
+        {filteredPosts.length > POSTS_PER_PAGE && (
+          <div className="max-w-5xl mx-auto mt-12">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (currentPage > 1) setCurrentPage(currentPage - 1);
+                    }}
+                    className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+                
+                {getPageNumbers().map((page, index) => (
+                  <PaginationItem key={`${page}-${index}`}>
+                    {page === 'ellipsis' ? (
+                      <PaginationEllipsis />
+                    ) : (
+                      <PaginationLink
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setCurrentPage(page);
+                        }}
+                        isActive={currentPage === page}
+                      >
+                        {page}
+                      </PaginationLink>
+                    )}
+                  </PaginationItem>
+                ))}
+                
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+                    }}
+                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        )}
       </div>
     </Layout>
   );
