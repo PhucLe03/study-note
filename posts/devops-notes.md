@@ -1,5 +1,6 @@
 ---
-title: 🚀 DevOps Learning Resources
+title: DevOps Learning Resources
+title-icon: 🚀
 excerpt: A curated list of DevOps resources covering foundations, Docker, GitHub Actions, and modern CI/CD practices.
 date: 2025-10-01
 readTime: 2 min read

@@ -1,5 +1,6 @@
 ---
-title: 🤖 AI Learning Resources
+title: AI Learning Resources
+title-icon: 🤖
 excerpt: A collection of practical AI learning links for development, design, automation, and productivity tools.
 date: 2025-10-01
 readTime: 5 min read
