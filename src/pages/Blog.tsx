@@ -4,13 +4,15 @@ import Layout from "@/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { fetchAllPosts, type BlogPost } from "@/data/posts";
-import { Calendar, Clock, BookOpen, StickyNote } from "lucide-react";
+import { Calendar, Clock, BookOpen, StickyNote, Search } from "lucide-react";
 
 type CategoryFilter = "all" | "blog" | "note";
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,8 +24,9 @@ const Blog = () => {
   }, []);
 
   const filteredPosts = posts.filter(post => {
-    if (selectedCategory === "all") return true;
-    return post.category === selectedCategory;
+    const matchesCategory = selectedCategory === "all" || post.category === selectedCategory;
+    const matchesSearch = searchQuery === "" || post.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
   });
 
   return (
@@ -39,8 +42,8 @@ const Blog = () => {
           </p>
         </div>
 
-        {/* Category Filter */}
-        <div className="max-w-3xl mx-auto mb-12">
+        {/* Category Filter and Search */}
+        <div className="max-w-3xl mx-auto mb-12 space-y-6">
           <div className="flex flex-wrap gap-3 justify-center">
             <Button
               variant={selectedCategory === "all" ? "default" : "outline"}
@@ -65,6 +68,17 @@ const Blog = () => {
               <StickyNote className="w-4 h-4 mr-2" />
               Quick Notes
             </Button>
+          </div>
+          
+          <div className="relative max-w-md mx-auto">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search posts by title..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
           </div>
         </div>
 
