@@ -1,5 +1,6 @@
 export interface FrontmatterData {
   title: string;
+  tabtitle: string;
   excerpt: string;
   date: string;
   readTime: string;
@@ -34,7 +35,16 @@ export function parseFrontmatter(markdown: string): ParsedContent {
       // Parse comma-separated tags
       data.tags = value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
     } else {
-      data[key as keyof FrontmatterData] = value as any;
+      if (key === 'title') {
+        data.tabtitle = value;
+        data.title = value;
+      }
+      else if (key === 'title-icon') {
+        data.title = `${value} ${data.title}`;
+      }
+      else {
+        data[key as keyof FrontmatterData] = value as any;
+      }
     }
   });
 

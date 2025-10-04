@@ -15,6 +15,7 @@ const Blog = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    document.title = "Blog & Notes";
     fetchAllPosts()
       .then(setPosts)
       .finally(() => setIsLoading(false));

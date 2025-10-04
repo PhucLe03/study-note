@@ -42,6 +42,10 @@ const BlogPost = () => {
   if (!post) {
     return null;
   }
+  else {
+    document.title = post.tabtitle;
+  }
+
 
   return (
     <Layout>
