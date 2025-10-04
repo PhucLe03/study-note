@@ -1,29 +1,11 @@
 import { parseFrontmatter, type FrontmatterData } from "@/utils/frontmatter";
-
-export interface BlogPostConfig {
-  id: string;
-  contentPath: string;
-  category: "blog" | "note";
-}
+import { BlogPostConfig, blogPostConfigs } from "./posts-data";
 
 export interface BlogPost extends FrontmatterData {
   id: string;
   contentPath: string;
   category: "blog" | "note";
 }
-
-export const blogPostConfigs: BlogPostConfig[] = [
-  {
-    id: "devops-notes",
-    contentPath: "/study-note/posts/devops-notes.md",
-    category: "note"
-  },
-  {
-    id: "ai-notes",
-    contentPath: "/study-note/posts/ai-notes.md",
-    category: "note"
-  }
-];
 
 export async function fetchPost(config: BlogPostConfig): Promise<BlogPost> {
   const response = await fetch(config.contentPath);
