@@ -39,6 +39,11 @@ const Layout = ({ children }: LayoutProps) => {
                 Blog
               </Button>
             </Link>
+            <Link to="/about">
+              <Button variant="ghost" className="text-base hover:text-primary transition-colors">
+                About
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="icon"
