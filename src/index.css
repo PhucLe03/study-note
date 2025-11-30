@@ -163,6 +163,10 @@ All colors MUST be HSL.
   
   .blog-content pre {
     @apply bg-muted p-4 rounded-lg overflow-x-auto mb-6;
+
+    code span:first-child {
+        margin-left: -1ch; /* Shift left by exactly one character */
+    }
   }
   
   .blog-content blockquote {

@@ -8,6 +8,7 @@ import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { parseFrontmatter } from "@/utils/frontmatter";
+import CodeBlock from "@/components/CodeBlock";
 
 const BlogPost = () => {
   const { id } = useParams<{ id: string }>();
@@ -92,7 +93,7 @@ const BlogPost = () => {
             </div>
           ) : (
             <div className="prose prose-lg max-w-none blog-content">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={CodeBlock}>
                 {content}
               </ReactMarkdown>
             </div>
